@@ -5,7 +5,7 @@ schema:
         x-hasura-admin-secret: mydminsecretkeytoothfairy
 documents: src/core/graphql/*.gql
 generates:
-  src/core/tyes.ts:
+  src/core/types.ts:
     plugins:
       - typescript
       - typescript-operations

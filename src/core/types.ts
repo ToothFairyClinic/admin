@@ -16,6 +16,12 @@ export type Scalars = {
   uuid: { input: any; output: any; }
 };
 
+export type AdminGetMeOutput = {
+  __typename?: 'AdminGetMeOutput';
+  id: Scalars['String']['output'];
+  username: Scalars['String']['output'];
+};
+
 export type AdminRegisterInput = {
   password: Scalars['String']['input'];
   username: Scalars['String']['input'];
@@ -646,6 +652,7 @@ export type Query_Root = {
   __typename?: 'query_root';
   /** fetch data from the table: "admin" */
   admin: Array<Admin>;
+  adminGetMe?: Maybe<AdminGetMeOutput>;
   adminLogin?: Maybe<AdminLoginOutput>;
   /** fetch aggregated fields from the table: "admin" */
   admin_aggregate: Admin_Aggregate;
@@ -802,6 +809,11 @@ export type Uuid_Comparison_Exp = {
   _neq?: InputMaybe<Scalars['uuid']['input']>;
   _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
+
+export type AdimGetMeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AdimGetMeQuery = { __typename?: 'query_root', adminGetMe?: { __typename?: 'AdminGetMeOutput', id: string, username: string } | null };
 
 export type AdminLoginQueryVariables = Exact<{
   password: Scalars['String']['input'];
