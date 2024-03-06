@@ -1,4 +1,4 @@
-// import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.component";
+import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import {
   Create,
   NumberInput,
@@ -20,7 +20,7 @@ export const ProductCreate = () => (
         <SelectInput optionText="title" label=" категорія" />
       </ReferenceInput>
       <TextInput source="description" fullWidth label="Опис" />
-      {/* <CloudinaryInput source="image" label="Фото" /> */}
+      <CloudinaryInput source="image" label="Фото" />
       <NumberInput source="price" label="Ціна" />
       <NumberInput source="weight" label="Вага" />
     </SimpleForm>

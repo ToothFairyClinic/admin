@@ -1,5 +1,6 @@
-// import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.component";
 // import { CustomTitle } from "@app/common/components/custom-title/custom-title.component";
+import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
+import { CustomTitle } from "@app/common/components/custom-title/custom-title.component";
 import {
   Edit,
   NumberInput,
@@ -11,7 +12,7 @@ import {
 
 export const ProductEdit = () => {
   return (
-    <Edit>
+    <Edit title={<CustomTitle source={"title"} />}>
       <SimpleForm>
         <TextInput source="title" fullWidth label="Назва" />
         <ReferenceInput
@@ -22,7 +23,7 @@ export const ProductEdit = () => {
           <SelectInput optionText="title" label=" категорія" />
         </ReferenceInput>
         <TextInput source="description" fullWidth label="Опис" />
-        {/* <CloudinaryInput source="image" label="Фото" /> */}
+        <CloudinaryInput source="image" label="Фото" />
         <NumberInput source="price" label="Ціна" />
         <NumberInput source="weight" label="Вага" />
       </SimpleForm>
