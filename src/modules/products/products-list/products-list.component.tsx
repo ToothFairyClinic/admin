@@ -33,10 +33,7 @@ export const ProductList = () => (
       >
         <TextField source="title" label="Назва" />
       </ReferenceField>
-      {/* <FunctionField
-        label="Ціна"
-        render={(record: Products) => `${record.price} грн.`}
-      /> */}
+
       <EditButton />
     </Datagrid>
   </List>
