@@ -19,6 +19,8 @@ import { personnelResource } from "./modules/personnel/personnel-resource";
 import { personnelCategoryResource } from "./modules/personnel-category/personnel-category-resource";
 import { PriceListResource } from "./modules/price-list/price-list.resource";
 import { PriceListCategoryResource } from "./modules/price-list-category/price-list-category.resource";
+import { ourWorksResource } from "./modules/our-works/our-works-resource";
+import { reviewsResource } from "./modules/reviews/reviews-resource";
 
 export const App = () => {
   const [dataProvider, setDataProvider] = useState<DataProvider<string> | null>(
@@ -56,6 +58,8 @@ export const App = () => {
         <Resource {...personnelCategoryResource} />
         <Resource {...PriceListResource} />
         <Resource {...PriceListCategoryResource} />
+        <Resource {...ourWorksResource} />
+        <Resource {...reviewsResource} />
       </Admin>
     </>
   );
