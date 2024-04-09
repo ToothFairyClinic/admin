@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import {
   Admin,
   DataProvider,
-  EditGuesser,
   Loading,
   Resource,
 } from "react-admin";
-import buildHasuraProvider from "ra-data-hasura";
 import { productsResource } from "@app/modules/products/products-resource";
 import { authProvider } from "./core/auth-provider";
 import { buildDataProvider } from "./core/data-provider";

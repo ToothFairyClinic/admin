@@ -1,7 +1,6 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import {
   Create,
-  NumberInput,
   ReferenceInput,
   SelectInput,
   SimpleForm,

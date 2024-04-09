@@ -1,7 +1,5 @@
-import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import { CustomTitle } from "@app/common/components/custom-title/custom-title.component";
 import { Edit, SimpleForm, TextInput } from "react-admin";
-import { RichTextInput } from "ra-input-rich-text";
 
 export const ReviewsEdit = () => {
   return (

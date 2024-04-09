@@ -1,12 +1,5 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
-import {
-  Create,
-  NumberInput,
-  ReferenceInput,
-  SelectInput,
-  SimpleForm,
-  TextInput,
-} from "react-admin";
+import { Create, SimpleForm, TextInput } from "react-admin";
 
 export const ServicesCreate = () => (
   <Create title="Додати послугу">

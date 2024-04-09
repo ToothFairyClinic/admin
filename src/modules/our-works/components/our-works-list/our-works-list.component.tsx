@@ -1,13 +1,8 @@
 import {
   Datagrid,
   EditButton,
-  FunctionField,
   List,
-  ReferenceField,
-  ReferenceInput,
-  SelectInput,
   TextField,
-  TextInput,
 } from "react-admin";
 
 export const OurWorksList = () => (

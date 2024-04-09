@@ -1,7 +1,6 @@
 import {
   Datagrid,
   EditButton,
-  FunctionField,
   List,
   ReferenceField,
   ReferenceInput,

@@ -1,4 +1,3 @@
-import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import { Create, SimpleForm, TextInput } from "react-admin";
 
 export const ReviewsCreate = () => (

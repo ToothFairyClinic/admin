@@ -8,10 +8,6 @@ import {
 import AdminGetMeQueryGql from "@app/core/graphql/admin-get-me.gql";
 import AdminLoginQueryGql from "@app/core/graphql/admin-login.gql";
 
-// import OneSignalDeferred from "react-onesignal";
-// import OneSignal from "react-onesignal";
-// import OneSignalReact from "react-onesignal";
-
 export const authProvider = {
   login: async (variables: AdminLoginQueryVariables) => {
     const { data } = await apolloClient.query<
@@ -29,7 +25,6 @@ export const authProvider = {
   },
 
   logout: () => {
-    // OneSignalReact.removeExternalUserId();
     localStorage.removeItem(JWT_ADMIN_TOKEN);
     return Promise.resolve();
   },
