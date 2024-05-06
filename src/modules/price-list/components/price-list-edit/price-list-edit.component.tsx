@@ -20,7 +20,7 @@ export const PriceListEdit = () => {
         >
           <SelectInput optionText="title" label=" категорія" />
         </ReferenceInput>
-        <NumberInput source="price" label="Ціна" />
+        <TextInput source="price" label="Ціна" />
       </SimpleForm>
     </Edit>
   );

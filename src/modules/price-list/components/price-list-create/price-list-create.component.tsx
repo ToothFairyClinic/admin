@@ -18,7 +18,7 @@ export const PriceListCreate = () => (
       >
         <SelectInput optionText="title" label="Спеціалізація" />
       </ReferenceInput>
-      <NumberInput source="price" label="Ціна" />
+      <TextInput source="price" label="Ціна" />
     </SimpleForm>
   </Create>
 );
