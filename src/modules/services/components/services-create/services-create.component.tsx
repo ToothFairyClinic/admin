@@ -1,7 +1,6 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import { Create, SimpleForm, TextInput } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
-import { CloudinaryInput_2 } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent_2";
 
 
 export const ServicesCreate = () => (
