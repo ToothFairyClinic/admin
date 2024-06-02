@@ -12,7 +12,6 @@ export const OurWorksCreate = () => (
 
       <TextInput source="description" fullWidth label="Опис" />
       <CloudinaryInput source="image_before" label="Фото до" />
-      <CloudinaryInput source="image_after" label="Фото після" />
     </SimpleForm>
   </Create>
 );
