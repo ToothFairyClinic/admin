@@ -5,7 +5,7 @@ export const ServicesCreate = () => (
   <Create title="Додати послугу">
     <SimpleForm>
       <TextInput source="name" fullWidth label="Назва" />
-      <TextInput source="description" fullWidth label="Опис" multiline />
+      <RichTextInput source="description" fullWidth label="Опис" />
       <CloudinaryInput source="image" label="Фото" />
       <CloudinaryInput source="mainImage" label="Фото послуги" />
     </SimpleForm>
