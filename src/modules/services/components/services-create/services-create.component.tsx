@@ -9,7 +9,6 @@ export const ServicesCreate = () => (
       <TextInput source="name" fullWidth label="Назва" />
       <RichTextInput source="description" fullWidth label="Опис" />
       <CloudinaryInput source="image" label="Фото" />
-      <CloudinaryInput source="mainImage" label="Фото послуги" />
     </SimpleForm>
   </Create>
 );
