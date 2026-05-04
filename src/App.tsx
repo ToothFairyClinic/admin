@@ -19,6 +19,7 @@ import { PriceListResource } from "./modules/price-list/price-list.resource";
 import { PriceListCategoryResource } from "./modules/price-list-category/price-list-category.resource";
 import { ourWorksResource } from "./modules/our-works/our-works-resource";
 import { reviewsResource } from "./modules/reviews/reviews-resource";
+import { pageMetadataResource } from "./modules/page-metadata/page-metadata.resource";
 
 export const App = () => {
   const [dataProvider, setDataProvider] = useState<DataProvider<string> | null>(
@@ -58,6 +59,7 @@ export const App = () => {
         <Resource {...PriceListCategoryResource} />
         <Resource {...ourWorksResource} />
         <Resource {...reviewsResource} />
+        <Resource {...pageMetadataResource} />
       </Admin>
     </>
   );

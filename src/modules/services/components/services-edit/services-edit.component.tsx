@@ -11,6 +11,9 @@ export const ServicesEdit = () => {
         <RichTextInput source="description" fullWidth label="Опис" />
         <CloudinaryInput source="image" label="Фото іконки" />
         <CloudinaryInput source="mainImage" label="Фото послуги" />
+
+        <TextInput source="seo_title" fullWidth label="SEO title" />
+        <TextInput source="seo_description" fullWidth label="SEO Description" />
       </SimpleForm>
     </Edit>
   );
