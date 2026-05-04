@@ -9,8 +9,10 @@ export const ServicesCreate = () => (
       <TextInput source="name" fullWidth label="Назва" />
       <RichTextInput source="description" fullWidth label="Опис" />
       <CloudinaryInput source="image" label="Фото" />
-      <TextInput source="seo_title" fullWidth label="SEO title" />
-      <TextInput source="seo_description" multiline fullWidth label="SEO Description" />
+      <TextInput source="seo_title" fullWidth label="SEO title ua" />
+      <TextInput source="seo_description" multiline fullWidth label="SEO Description ua" />
+      <TextInput source="seo_title_en" fullWidth label="SEO title en" />
+      <TextInput source="seo_description_en" multiline fullWidth label="SEO Description en" />
     </SimpleForm>
   </Create>
 );
