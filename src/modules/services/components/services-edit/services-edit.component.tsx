@@ -8,10 +8,10 @@ export const ServicesEdit = () => {
     <Edit title={<CustomTitle source={"title"} />}>
       <SimpleForm>
         <TextInput source="name" fullWidth label="Назва" />
+        <TextInput source="name_en" fullWidth label="Назва en" />
         <RichTextInput source="description" fullWidth label="Опис" />
         <CloudinaryInput source="image" label="Фото іконки" />
         <CloudinaryInput source="mainImage" label="Фото послуги" />
-
         <TextInput source="seo_title" fullWidth label="SEO title ua" />
         <TextInput source="seo_description" fullWidth label="SEO Description ua" />
         <TextInput source="seo_title_en" fullWidth label="SEO title en" />
