@@ -1,6 +1,6 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import { CustomTitle } from "@app/common/components/custom-title/custom-title.component";
-import { Edit, ReferenceInput, SelectInput, SimpleForm, TextInput } from "react-admin";
+import { ArrayInput, Edit, ReferenceInput, SelectInput, SimpleForm, SimpleFormIterator, TextInput } from "react-admin";
 import { RichTextInput } from "ra-input-rich-text";
 
 export const ServicesEdit = () => {
@@ -13,16 +13,30 @@ export const ServicesEdit = () => {
         <RichTextInput source="description_en" fullWidth label="Опис en" />
         <CloudinaryInput source="image" label="Фото іконки" />
         <CloudinaryInput source="mainImage" label="Фото послуги" />
+
+        {/* ----------------- Поле FAQ (UA) ----------------- */}
+        <ArrayInput source="faq_ua" label="Часті питання (FAQ UA)" fullWidth>
+          <SimpleFormIterator inline>
+            <TextInput source="question" label="Питання" fullWidth />
+            <TextInput source="answer" label="Відповідь" multiline fullWidth />
+          </SimpleFormIterator>
+        </ArrayInput>
+
+        {/* ----------------- Поле FAQ (EN) ----------------- */}
+        <ArrayInput source="faq_en" label="Часті питання (FAQ EN)" fullWidth>
+          <SimpleFormIterator inline>
+            <TextInput source="question" label="Питання (en)" fullWidth />
+            <TextInput source="answer" label="Відповідь (en)" multiline fullWidth />
+          </SimpleFormIterator>
+        </ArrayInput>
+        {/* ------------------------------------------------ */}
+
         <TextInput source="seo_title" fullWidth label="SEO title ua" />
-        <TextInput source="seo_description" fullWidth label="SEO Description ua" />
+        <TextInput source="seo_description" multiline fullWidth label="SEO Description ua" />
         <TextInput source="seo_title_en" fullWidth label="SEO title en" />
         <TextInput source="seo_description_en" multiline fullWidth label="SEO Description en" />
 
-        <ReferenceInput
-          source="parent_id"
-          reference="services"
-        // filter={{ parent_id: { _is_null: true } }}
-        >
+        <ReferenceInput source="parent_id" reference="services">
           <SelectInput
             optionText="name"
             label="Батьківська послуга"
