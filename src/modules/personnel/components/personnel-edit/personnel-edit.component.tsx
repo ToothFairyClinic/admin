@@ -1,36 +1,100 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
+import { RichTextInput } from "ra-input-rich-text";
 import {
+  ArrayInput,
   Edit,
+  ReferenceArrayInput,
   ReferenceInput,
+  SelectArrayInput,
   SelectInput,
   SimpleForm,
+  SimpleFormIterator,
   TextInput,
+  useRecordContext,
 } from "react-admin";
 
-export const PersonnelEdit = () => (
-  <Edit mutationMode="pessimistic">
-    <SimpleForm>
-      <TextInput source="name" fullWidth label="Ім'я" />
-      <ReferenceInput
-        source="personnel_category_id"
-        reference="personnel_categories"
-        label="Категорія"
-      >
-        <SelectInput optionText="title" label="Спеціалізація" />
-      </ReferenceInput>
-      <ReferenceInput
-        source="personnel_category_id_second"
-        reference="personnel_categories"
-        label="Категорія"
-      >
-        <SelectInput
-          optionText="title"
-          label="Дурга Спеціалізація (не обов'язково)"
-        />
-      </ReferenceInput>
+const transform = (data: any) => {
+  const { category_ids, service_ids, ...rest } = data;
+  return {
+    ...rest,
+    categories: {
+      data: (category_ids || []).map((id: string) => ({ category_id: id }))
+    },
+    personnel_services: {
+      data: (service_ids || []).map((id: string) => ({ service_id: id }))
+    }
+  };
+};
 
-      <TextInput source="description" fullWidth label="Опис" />
-      <CloudinaryInput source="image" label="Фото" />
+const PersonnelEditForm = () => {
+  const record = useRecordContext();
+
+  if (!record) return null;
+
+  const initialValues = {
+    category_ids: record.categories?.map((c: any) => c.category_id),
+    service_ids: record.personnel_services?.map((c: any) => c.service_id),
+  };
+
+  return (
+    <SimpleForm defaultValues={initialValues}>
+
+      <h3>Основна інформація</h3>
+      <TextInput source="name" fullWidth label="Ім'я та прізвище (UA)" required />
+      <TextInput source="name_en" fullWidth label="Ім'я та прізвище (EN)" />
+
+      <RichTextInput source="description" fullWidth label="Біографія / Опис (UA)" />
+      <RichTextInput source="description_en" fullWidth label="Біографія / Опис (EN)" />
+
+      <TextInput
+        source="experience"
+        fullWidth
+        label="Досвід роботи / Стаж"
+        helperText="Наприклад: 10 років або Досвід роботи 12 років"
+      />
+
+      <CloudinaryInput source="image" label="Фото лікаря" />
+
+      <h3>URL та Спеціалізації</h3>
+      <TextInput source="slug" fullWidth label="Slug (UA)" required />
+      <TextInput source="slug_en" fullWidth label="Slug (EN)" />
+
+      <ReferenceArrayInput
+        source="category_ids"
+        reference="personnel_categories"
+        label="Спеціалізації / Категорії"
+      >
+        <SelectArrayInput optionText="title" fullWidth />
+      </ReferenceArrayInput>
+
+      <ReferenceArrayInput
+        source="service_ids"
+        reference="services"
+        label="Послуги, які надає лікар"
+      >
+        <SelectArrayInput optionText="name" fullWidth />
+      </ReferenceArrayInput>
+
+      <h3>Сертифікати та дипломи</h3>
+      <ArrayInput source="certificates" label="Список сертифікатів (зображення)">
+        <SimpleFormIterator inline>
+          <CloudinaryInput source="" label="Фото сертифіката" />
+        </SimpleFormIterator>
+      </ArrayInput>
+
+      <h3>SEO Налаштування</h3>
+      <TextInput source="seo_title" fullWidth label="SEO Title (UA)" />
+      <TextInput source="seo_description" multiline fullWidth label="SEO Description (UA)" />
+
+      <TextInput source="seo_title_en" fullWidth label="SEO Title (EN)" />
+      <TextInput source="seo_description_en" multiline fullWidth label="SEO Description (EN)" />
+
     </SimpleForm>
+  );
+};
+
+export const PersonnelEdit = () => (
+  <Edit transform={transform} mutationMode="pessimistic">
+    <PersonnelEditForm />
   </Edit>
 );

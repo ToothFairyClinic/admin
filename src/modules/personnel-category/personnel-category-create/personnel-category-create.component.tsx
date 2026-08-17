@@ -5,6 +5,7 @@ export const PersonnelCategoryCreate = () => (
   <Create title="Додати категорію персонала">
     <SimpleForm>
       <TextInput source="title" fullWidth label="Назва категорії" />
+      <TextInput source="title_en" fullWidth label="Title category (en)" />
     </SimpleForm>
   </Create>
 );
