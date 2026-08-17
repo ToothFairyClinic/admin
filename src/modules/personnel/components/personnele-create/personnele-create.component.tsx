@@ -41,8 +41,16 @@ export const PersonnelCreate = () => (
         label="Досвід роботи / Стаж"
         helperText="Наприклад: 10 років або Досвід роботи 12 років"
       />
+      <TextInput
+        source="experience_en"
+        fullWidth
+        label="Досвід роботи / Стаж (EN)"
+        helperText="Наприклад: 10 years or 12 years experience"
+      />
 
       <CloudinaryInput source="image" label="Фото лікаря" />
+      <TextInput source="image_alt" fullWidth label="Alt для фото лікаря (UA)" />
+      <TextInput source="image_alt_en" fullWidth label="Alt для фото лікаря (EN)" />
 
       <h3>URL та Спеціалізації</h3>
       <TextInput source="slug" fullWidth label="Slug (UA)" required />
