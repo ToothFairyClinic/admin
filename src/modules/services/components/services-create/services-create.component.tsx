@@ -52,6 +52,8 @@ export const ServicesCreate = () => (
 
       <TextInput source="slug" multiline fullWidth label="Slug" />
       <TextInput source="slug_en" multiline fullWidth label="Slug en" />
+      <TextInput source="custom_robots " multiline fullWidth label="Robots (html tags)" />
+
     </SimpleForm>
   </Create>
 );
