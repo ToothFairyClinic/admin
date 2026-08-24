@@ -12,7 +12,10 @@ export const ServicesEdit = () => {
         <RichTextInput source="description" fullWidth label="Опис" />
         <RichTextInput source="description_en" fullWidth label="Опис en" />
         <CloudinaryInput source="image" label="Фото іконки" />
+
         <CloudinaryInput source="mainImage" label="Фото послуги" />
+        <CloudinaryInput source="image_alt" label="Alt текст" />
+        <CloudinaryInput source="image_alt_en" label="Alt текст en" />
 
         <ArrayInput source="faq_ua" label="Часті питання (FAQ UA)" fullWidth>
           <SimpleFormIterator inline>
