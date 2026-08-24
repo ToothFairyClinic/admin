@@ -82,7 +82,6 @@ export const buildDataProvider = async () => {
       dataProviderHasura.getManyReference(resource, params),
     update: async (resource, params) => {
       if (resource === 'personnel') {
-        // 1. Прибираємо системні та вкладені поля перед відправкою основного запису в Hasura
         const {
           __typename,
           id,
@@ -93,14 +92,12 @@ export const buildDataProvider = async () => {
           ...cleanMainData
         } = params.data;
 
-        // 2. Оновлюємо основний запис у таблиці personnel
         await dataProviderHasura.update('personnel', {
           id: params.id,
           data: cleanMainData,
           previousData: params.previousData,
         });
 
-        // 3. Формуємо нові масиви для M2M-зв'язків
         const newCategories = (categories?.data || []).map((c: any) => ({
           personnel_id: params.id,
           category_id: c.category_id,
@@ -111,7 +108,6 @@ export const buildDataProvider = async () => {
           service_id: s.service_id,
         }));
 
-        // 4. Оновлюємо M2M-зв'язки в БД
         await apolloClient.mutate({
           mutation: UPDATE_PERSONNEL_RELATIONS,
           variables: {
@@ -121,8 +117,6 @@ export const buildDataProvider = async () => {
           },
         });
 
-        // 5. КЛЮЧОВИЙ КРОК: Отримуємо свіжий оновлений запис з БД
-        // Це гарантує, що React Admin отримає повноцінний об'єкт { data: { id: ..., name: ... } }
         const { data: updatedRecord } = await apolloClient.query({
           query: GET_PERSONNEL_ONE,
           variables: { id: params.id },

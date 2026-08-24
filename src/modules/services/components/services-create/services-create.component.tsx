@@ -20,7 +20,6 @@ export const ServicesCreate = () => (
       <CloudinaryInput source="image" label="Фото іконки" />
       <CloudinaryInput source="mainImage" label="Фото послуги" />
 
-      {/* ----------------- Поле FAQ (UA) ----------------- */}
       <ArrayInput source="faq_ua" label="Часті питання (FAQ UA)" fullWidth>
         <SimpleFormIterator inline>
           <TextInput source="question" label="Питання" fullWidth />
@@ -28,14 +27,12 @@ export const ServicesCreate = () => (
         </SimpleFormIterator>
       </ArrayInput>
 
-      {/* ----------------- Поле FAQ (EN) ----------------- */}
       <ArrayInput source="faq_en" label="Часті питання (FAQ EN)" fullWidth>
         <SimpleFormIterator inline>
           <TextInput source="question" label="Питання (en)" fullWidth />
           <TextInput source="answer" label="Відповідь (en)" multiline fullWidth />
         </SimpleFormIterator>
       </ArrayInput>
-      {/* ------------------------------------------------ */}
 
       <TextInput source="seo_title" fullWidth label="SEO title ua" />
       <TextInput source="seo_description" multiline fullWidth label="SEO Description ua" />

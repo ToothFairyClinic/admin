@@ -27,7 +27,6 @@ const transform = (data: any) => {
 export const PersonnelCreate = () => (
   <Create title="Додати лікаря / персонал" transform={transform}>
     <SimpleForm>
-      {/* --- ОСНОВНА ІНФОРМАЦІЯ --- */}
       <h3>Основна інформація</h3>
       <TextInput source="name" fullWidth label="Ім'я та прізвище (UA)" required />
       <TextInput source="name_en" fullWidth label="Ім'я та прізвище (EN)" />
@@ -72,7 +71,6 @@ export const PersonnelCreate = () => (
         <SelectArrayInput optionText="name" fullWidth />
       </ReferenceArrayInput>
 
-      {/* --- СЕРТИФІКАТИ ТА ДИПЛОМИ (JSONB) --- */}
       <h3>Сертифікати та дипломи</h3>
       <ArrayInput source="certificates" label="Список сертифікатів (зображення)">
         <SimpleFormIterator inline>
