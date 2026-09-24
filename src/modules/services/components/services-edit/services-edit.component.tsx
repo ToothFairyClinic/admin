@@ -9,6 +9,8 @@ export const ServicesEdit = () => {
       <SimpleForm>
         <TextInput source="name" fullWidth label="Назва" />
         <TextInput source="name_en" fullWidth label="Назва en" />
+        <TextInput source="h1" fullWidth label="Заголовок H1 (UA)" />
+        <TextInput source="h1_en" fullWidth label="Заголовок H1 (EN)" />
         <RichTextInput source="description" fullWidth label="Опис" />
         <RichTextInput source="description_en" fullWidth label="Опис en" />
         <CloudinaryInput source="image" label="Фото іконки" />
