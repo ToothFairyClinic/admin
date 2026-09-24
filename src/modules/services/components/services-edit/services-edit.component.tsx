@@ -35,7 +35,12 @@ export const ServicesEdit = () => {
         <TextInput source="seo_title_en" fullWidth label="SEO title en" />
         <TextInput source="seo_description_en" multiline fullWidth label="SEO Description en" />
 
-        <ReferenceInput source="parent_id" reference="services">
+        <ReferenceInput
+          source="parent_id"
+          reference="services"
+          perPage={200}
+          sort={{ field: "name", order: "ASC" }}
+        >
           <SelectInput
             optionText="name"
             label="Батьківська послуга"

@@ -13,9 +13,12 @@ const GET_PERSONNEL_ONE = gql`
       description
       description_en
       image
+      image_alt
+      image_alt_en
       slug
       slug_en
       experience
+      experience_en
       certificates
       seo_title
       seo_description

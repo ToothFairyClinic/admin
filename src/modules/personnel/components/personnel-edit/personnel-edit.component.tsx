@@ -70,17 +70,19 @@ const PersonnelEditForm = () => {
       <ReferenceArrayInput
         source="category_ids"
         reference="personnel_categories"
-        label="Спеціалізації / Категорії"
+        perPage={200}
+        sort={{ field: "title", order: "ASC" }}
       >
-        <SelectArrayInput optionText="title" fullWidth />
+        <SelectArrayInput optionText="title" fullWidth label="Спеціалізації / Категорії" />
       </ReferenceArrayInput>
 
       <ReferenceArrayInput
         source="service_ids"
         reference="services"
-        label="Послуги, які надає лікар"
+        perPage={200}
+        sort={{ field: "name", order: "ASC" }}
       >
-        <SelectArrayInput optionText="name" fullWidth />
+        <SelectArrayInput optionText="name" fullWidth label="Послуги, які надає лікар" />
       </ReferenceArrayInput>
 
       <h3>Сертифікати та дипломи</h3>
