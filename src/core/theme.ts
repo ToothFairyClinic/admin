@@ -45,6 +45,15 @@ export const theme: RaThemeOptions = {
             color: "#1F1F1F",
             minHeight: "18rem",
             padding: "1rem 1.25rem",
+            "&:hover, &:focus, &:focus-visible": {
+              backgroundColor: "#FFFFFF",
+              color: "#1F1F1F",
+            },
+            '&[contenteditable="false"], &[contenteditable="false"]:hover, &[contenteditable="false"]:focus':
+              {
+                backgroundColor: "#ECECEC",
+                color: "#5F5F5F",
+              },
             "& *": {
               color: "inherit !important",
               backgroundColor: "transparent !important",
