@@ -1,6 +1,6 @@
-import { ThemeOptions } from "@mui/material";
+import { RaThemeOptions } from "ra-ui-materialui";
 
-export const theme: ThemeOptions = {
+export const theme: RaThemeOptions = {
   palette: {
     mode: "dark",
     primary: {
@@ -34,6 +34,25 @@ export const theme: ThemeOptions = {
         root: {
           backgroundColor: "#D9DBB3",
           color: "#FFFFFF",
+        },
+      },
+    },
+    RaRichTextInput: {
+      styleOverrides: {
+        root: {
+          "& .RaRichTextInput-editorContent .ProseMirror": {
+            backgroundColor: "#FFFFFF",
+            color: "#1F1F1F",
+            minHeight: "18rem",
+            padding: "1rem 1.25rem",
+            "& *": {
+              color: "inherit !important",
+              backgroundColor: "transparent !important",
+            },
+            "& a": {
+              color: "#0B57D0 !important",
+            },
+          },
         },
       },
     },
