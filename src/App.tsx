@@ -11,7 +11,6 @@ import { authProvider } from "./core/auth-provider";
 import { buildDataProvider } from "./core/data-provider";
 import { theme } from "./core/theme";
 import { i18nProvider } from "./core/in18n";
-import { advantagesResource } from "./modules/avantages/advantages.resourve";
 import { servicesResource } from "./modules/services/services-resource";
 import { personnelResource } from "./modules/personnel/personnel-resource";
 import { personnelCategoryResource } from "./modules/personnel-category/personnel-category-resource";
@@ -21,6 +20,7 @@ import { ourWorksResource } from "./modules/our-works/our-works-resource";
 import { reviewsResource } from "./modules/reviews/reviews-resource";
 import { pageMetadataResource } from "./modules/page-metadata/page-metadata.resource";
 import { postsResource } from "./modules/posts/posts-resource";
+import { homePageResource } from "./modules/home-page/home-page.resource";
 
 export const App = () => {
   const [dataProvider, setDataProvider] = useState<DataProvider<string> | null>(
@@ -51,8 +51,8 @@ export const App = () => {
         i18nProvider={i18nProvider}
         theme={theme}
       >
+        <Resource {...homePageResource} />
         <Resource {...productsResource} />
-        <Resource {...advantagesResource} />
         <Resource {...servicesResource} />
         <Resource {...personnelResource} />
         <Resource {...personnelCategoryResource} />
