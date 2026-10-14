@@ -13,6 +13,7 @@ export const PriceListEdit = () => {
     <Edit title={<CustomTitle source={"title"} />}>
       <SimpleForm>
         <TextInput source="title" fullWidth label="Назва" />
+        <TextInput source="title_en" fullWidth label="Назва (EN)" />
         <ReferenceInput
           source="price_list_category_id"
           reference="price_list_categories"

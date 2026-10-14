@@ -11,6 +11,8 @@ export const ServicesEdit = () => {
         <TextInput source="name_en" fullWidth label="Назва en" />
         <TextInput source="h1" fullWidth label="Заголовок H1 (UA)" />
         <TextInput source="h1_en" fullWidth label="Заголовок H1 (EN)" />
+        <TextInput source="summary" multiline fullWidth label="Короткий опис під H1 (UA, до 60 слів, без цін)" />
+        <TextInput source="summary_en" multiline fullWidth label="Короткий опис під H1 (EN, до 60 слів, без цін)" />
         <RichTextInput source="description" fullWidth label="Опис" />
         <RichTextInput source="description_en" fullWidth label="Опис en" />
         <CloudinaryInput source="image" label="Фото іконки" />
@@ -29,6 +31,18 @@ export const ServicesEdit = () => {
           <SimpleFormIterator inline>
             <TextInput source="question" label="Питання (en)" fullWidth />
             <TextInput source="answer" label="Відповідь (en)" multiline fullWidth />
+          </SimpleFormIterator>
+        </ArrayInput>
+
+        <ArrayInput source="price_items" label="Ціни на сторінці (позиції прайсу, порядок - стрілками)" fullWidth>
+          <SimpleFormIterator inline>
+            <ReferenceInput source="price_list_id" reference="price_list" perPage={300} sort={{ field: "title", order: "ASC" }}>
+              <SelectInput
+                optionText={(row: { title: string; price?: string }) => `${row.title.trim()} - ${row.price ?? ""}`}
+                label="Позиція прайсу"
+                fullWidth
+              />
+            </ReferenceInput>
           </SimpleFormIterator>
         </ArrayInput>
 
