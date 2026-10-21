@@ -1,17 +1,10 @@
-import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
-import {
-  Edit,
-  SimpleForm,
-  TextInput,
-} from "react-admin";
+import { Edit, SimpleForm } from "react-admin";
+import { OurWorkFormFields } from "../our-work-form/our-work-form-fields.component";
 
 export const OurWorksEdit = () => (
-  <Edit title="Додати приклад роботи">
+  <Edit title="Приклад роботи" mutationMode="pessimistic">
     <SimpleForm>
-      <TextInput source="title" fullWidth label="Назва" />
-
-      <TextInput source="description" fullWidth label="Опис" />
-      <CloudinaryInput source="image_before" label="Фото до" />
+      <OurWorkFormFields />
     </SimpleForm>
   </Edit>
 );
