@@ -8,7 +8,7 @@ import {
   ArrayInput,
   SimpleFormIterator,
 } from "react-admin";
-import { RichTextInput } from "ra-input-rich-text";
+import { PostEditor } from "@app/common/components/post-editor/post-editor.component";
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 
 const transform = (data: any) => {
@@ -31,8 +31,8 @@ export const PersonnelCreate = () => (
       <TextInput source="name" fullWidth label="Ім'я та прізвище (UA)" required />
       <TextInput source="name_en" fullWidth label="Ім'я та прізвище (EN)" />
 
-      <RichTextInput source="description" fullWidth label="Біографія / Опис (UA)" />
-      <RichTextInput source="description_en" fullWidth label="Біографія / Опис (EN)" />
+      <PostEditor source="description" label="Біографія / Опис (UA)" />
+      <PostEditor source="description_en" label="Біографія / Опис (EN)" />
 
       <TextInput
         source="experience"

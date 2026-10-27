@@ -9,7 +9,7 @@ import {
   TextInput,
   required,
 } from "react-admin";
-import { RichTextInput } from "ra-input-rich-text";
+import { PostEditor } from "@app/common/components/post-editor/post-editor.component";
 import { Box, Typography } from "@mui/material";
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 
@@ -56,14 +56,14 @@ export const HomePageEdit = () => (
         <Lang title="UA">
           <TextInput source="about_label" label="Надзаголовок" fullWidth />
           <TextInput source="about_title" label="Заголовок H2" fullWidth />
-          <RichTextInput source="about_text" label="Текст" fullWidth />
+          <PostEditor source="about_text" label="Текст" />
           <TextInput source="about_button" label="Текст кнопки (прокручує до послуг)" fullWidth />
           <TextInput source="about_image_alt" label="Alt фото" fullWidth />
         </Lang>
         <Lang title="EN">
           <TextInput source="about_label_en" label="Label" fullWidth />
           <TextInput source="about_title_en" label="H2" fullWidth />
-          <RichTextInput source="about_text_en" label="Text" fullWidth />
+          <PostEditor source="about_text_en" label="Text" />
           <TextInput source="about_button_en" label="Button" fullWidth />
           <TextInput source="about_image_alt_en" label="Image alt" fullWidth />
         </Lang>
@@ -142,15 +142,15 @@ export const HomePageEdit = () => (
         </Typography>
         <Lang title="UA">
           <TextInput source="text_title" label="Заголовок H2" fullWidth />
-          <RichTextInput source="text_intro" label="Вступ (видно одразу)" fullWidth />
-          <RichTextInput source="text_more" label="Текст після «Читати більше»" fullWidth />
+          <PostEditor source="text_intro" label="Вступ (видно одразу)" />
+          <PostEditor source="text_more" label="Текст після «Читати більше»" />
           <TextInput source="text_more_button" label="Кнопка розгортання" />
           <TextInput source="text_less_button" label="Кнопка згортання" />
         </Lang>
         <Lang title="EN">
           <TextInput source="text_title_en" label="H2" fullWidth />
-          <RichTextInput source="text_intro_en" label="Intro" fullWidth />
-          <RichTextInput source="text_more_en" label="Text after «Read more»" fullWidth />
+          <PostEditor source="text_intro_en" label="Intro" />
+          <PostEditor source="text_more_en" label="Text after «Read more»" />
           <TextInput source="text_more_button_en" label="Expand button" />
           <TextInput source="text_less_button_en" label="Collapse button" />
         </Lang>
@@ -162,7 +162,7 @@ export const HomePageEdit = () => (
           <ArrayInput source="faq" label="Запитання">
             <SimpleFormIterator fullWidth>
               <TextInput source="question" label="Запитання" fullWidth />
-              <RichTextInput source="answer" label="Відповідь" fullWidth />
+              <PostEditor source="answer" label="Відповідь" />
             </SimpleFormIterator>
           </ArrayInput>
         </Lang>
@@ -171,7 +171,7 @@ export const HomePageEdit = () => (
           <ArrayInput source="faq_en" label="Questions">
             <SimpleFormIterator fullWidth>
               <TextInput source="question" label="Question" fullWidth />
-              <RichTextInput source="answer" label="Answer" fullWidth />
+              <PostEditor source="answer" label="Answer" />
             </SimpleFormIterator>
           </ArrayInput>
         </Lang>

@@ -1,7 +1,7 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import { CustomTitle } from "@app/common/components/custom-title/custom-title.component";
 import { ArrayInput, Edit, ReferenceInput, SelectInput, SimpleForm, SimpleFormIterator, TextInput } from "react-admin";
-import { RichTextInput } from "ra-input-rich-text";
+import { PostEditor } from "@app/common/components/post-editor/post-editor.component";
 
 export const ServicesEdit = () => {
   return (
@@ -13,8 +13,8 @@ export const ServicesEdit = () => {
         <TextInput source="h1_en" fullWidth label="Заголовок H1 (EN)" />
         <TextInput source="summary" multiline fullWidth label="Короткий опис під H1 (UA, до 60 слів, без цін)" />
         <TextInput source="summary_en" multiline fullWidth label="Короткий опис під H1 (EN, до 60 слів, без цін)" />
-        <RichTextInput source="description" fullWidth label="Опис" />
-        <RichTextInput source="description_en" fullWidth label="Опис en" />
+        <PostEditor source="description" label="Опис" />
+        <PostEditor source="description_en" label="Опис en" />
         <CloudinaryInput source="image" label="Фото іконки" />
         <CloudinaryInput source="mainImage" label="Фото послуги" />
         <TextInput source="image_alt" label="Alt текст" />

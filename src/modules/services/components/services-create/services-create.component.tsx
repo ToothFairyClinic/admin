@@ -8,7 +8,7 @@ import {
   ArrayInput,
   SimpleFormIterator
 } from "react-admin";
-import { RichTextInput } from "ra-input-rich-text";
+import { PostEditor } from "@app/common/components/post-editor/post-editor.component";
 
 export const ServicesCreate = () => (
   <Create title="Додати послугу">
@@ -17,8 +17,8 @@ export const ServicesCreate = () => (
       <TextInput source="name_en" fullWidth label="Назва en" />
       <TextInput source="h1" fullWidth label="Заголовок H1 (UA)" />
       <TextInput source="h1_en" fullWidth label="Заголовок H1 (EN)" />
-      <RichTextInput source="description" fullWidth label="Опис" />
-      <RichTextInput source="description_en" fullWidth label="Опис en" />
+      <PostEditor source="description" label="Опис" />
+      <PostEditor source="description_en" label="Опис en" />
       <CloudinaryInput source="image" label="Фото іконки" />
       <CloudinaryInput source="mainImage" label="Фото послуги" />
       <TextInput source="image_alt" label="Alt текст" />
