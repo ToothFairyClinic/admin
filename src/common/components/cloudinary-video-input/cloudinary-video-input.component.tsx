@@ -1,7 +1,8 @@
 import { FC, useRef, useState } from "react";
 import { InputProps, useInput, useNotify } from "react-admin";
 import { useFormContext } from "react-hook-form";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import { uploadErrorMessage } from "@app/core/cloudinary-upload";
 import {
   Button,
   Card,
@@ -84,7 +85,7 @@ export const CloudinaryVideoInput: FC<CloudinaryVideoInputProps> = (props) => {
       setValue(meta.uploadedAt, data.created_at || new Date().toISOString(), opts);
       notify("Відео завантажено. Збережіть публікацію", { type: "success" });
     } catch (e) {
-      notify(`Не вдалося завантажити відео: ${(e as AxiosError).message}`, { type: "error" });
+      notify(uploadErrorMessage(e, file), { type: "error" });
     } finally {
       setProgress(null);
       if (inputRef.current) inputRef.current.value = "";

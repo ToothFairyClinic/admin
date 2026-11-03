@@ -15,7 +15,6 @@ import TableChartIcon from "@mui/icons-material/TableChart";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import HtmlIcon from "@mui/icons-material/Html";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
-import axios from "axios";
 import { useNotify } from "react-admin";
 import {
   RichTextInput,
@@ -35,7 +34,7 @@ import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import { useCloudinarySignatureLazyQuery } from "@app/core/types";
-import { CloudinaryUploadDTO } from "../cloudinary-input-ui/cloudinary-upload.dto";
+import { prepareImage, uploadErrorMessage, uploadToCloudinary } from "@app/core/cloudinary-upload";
 import { EMBED_EDIT_EVENT, Figure, formatHtml, HtmlEmbed, wrapUnknownHtml } from "./editor-extensions";
 
 const CLOUD_NAME = "dc7d3byxg";
@@ -128,10 +127,12 @@ const ImageUploadButton = () => {
   const [getSignature] = useCloudinarySignatureLazyQuery({ fetchPolicy: "network-only" });
 
   const onPick = useCallback(
-    async (file: File) => {
+    async (picked: File) => {
       if (!editor) return;
       setBusy(true);
+      let file = picked;
       try {
+        file = await prepareImage(picked);
         const { data: sig } = await getSignature();
         const s = sig?.cloudinarySignature;
         if (!s) {
@@ -139,19 +140,7 @@ const ImageUploadButton = () => {
           return;
         }
 
-        const form = new FormData();
-        form.append("file", file);
-        form.append("api_key", s.apiKey);
-        form.append("public_id", s.publicId);
-        form.append("signature", s.signature);
-        form.append("timestamp", String(s.timestamp));
-        form.append("folder", "products");
-        form.append("upload_preset", "nibw5oyz");
-
-        const { data } = await axios.post<CloudinaryUploadDTO>(
-          `https://api.cloudinary.com/v1_1/${s.cloudName}/auto/upload`,
-          form
-        );
+        const data = await uploadToCloudinary(file, s);
 
         const alt = window.prompt("Опис зображення (alt): що на фото. Можна лишити порожнім:") || "";
         const caption =
@@ -166,7 +155,7 @@ const ImageUploadButton = () => {
           })
           .run();
       } catch (e) {
-        notify("Помилка завантаження зображення", { type: "error" });
+        notify(uploadErrorMessage(e, file), { type: "error" });
       } finally {
         setBusy(false);
         if (inputRef.current) inputRef.current.value = "";
