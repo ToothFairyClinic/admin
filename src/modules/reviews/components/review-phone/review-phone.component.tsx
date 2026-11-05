@@ -17,7 +17,7 @@ export const RevealPhoneField = () => {
   const [visible, setVisible] = useState(false);
   if (!record?.client_phone) return null;
   return (
-    <Labeled label="Номер телефона">
+    <Labeled label="Номер телефона" sx={{ mb: 2 }}>
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
         <Typography variant="body1">{visible ? record.client_phone : maskPhone(record.client_phone)}</Typography>
         <Tooltip title={visible ? "Сховати номер" : "Показати номер"}>

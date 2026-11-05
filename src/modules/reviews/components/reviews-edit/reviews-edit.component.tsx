@@ -7,7 +7,7 @@ export const ReviewsEdit = () => {
     <Edit title={<CustomTitle source={"client_name"} />} mutationMode="pessimistic">
       <SimpleForm>
         <BooleanInput source="is_published" label="Опублікувати на сайті" />
-        <Labeled label="Надіслано">
+        <Labeled label="Надіслано" sx={{ mb: 2 }}>
           <DateField source="created_at" showTime />
         </Labeled>
         <TextInput source="client_name" fullWidth label="Ім'я" />
