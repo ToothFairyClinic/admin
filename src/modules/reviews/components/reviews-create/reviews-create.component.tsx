@@ -1,4 +1,4 @@
-import { Create, SimpleForm, TextInput } from "react-admin";
+import { BooleanInput, Create, SimpleForm, TextInput } from "react-admin";
 
 export const ReviewsCreate = () => (
   <Create title="Додати коментар">
@@ -6,6 +6,8 @@ export const ReviewsCreate = () => (
       <TextInput source="client_name" fullWidth label="Ім'я" />
       <TextInput source="client_phone" fullWidth label="Номер телефона" />
       <TextInput source="comment" fullWidth label="Коментар" multiline />
+      {/* відгук, доданий адміністратором, одразу на сайті */}
+      <BooleanInput source="is_published" label="Опублікувати на сайті" defaultValue={true} />
     </SimpleForm>
   </Create>
 );
