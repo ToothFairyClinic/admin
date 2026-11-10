@@ -1,4 +1,5 @@
 import { BooleanInput, DateTimeInput, TextInput, required } from "react-admin";
+import { AltTextInput } from "@app/common/components/alt-text-input/alt-text-input.component";
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
 import { PostEditor } from "@app/common/components/post-editor/post-editor.component";
 
@@ -12,6 +13,7 @@ export const OurWorkFormFields = () => (
     <TextInput source="title" fullWidth label="Назва" validate={required()} />
     <TextInput source="description" fullWidth label="Опис" validate={required()} />
     <CloudinaryInput source="image_before" label="Фото (до і після на одному зображенні: зліва до, справа після)" />
+    <AltTextInput source="image_alt" imageSource="image_before" label="Alt фото" fallback="назву роботи" />
 
     <h3>Сторінка кейсу</h3>
     <p style={{ margin: 0, opacity: 0.7 }}>
@@ -29,7 +31,6 @@ export const OurWorkFormFields = () => (
     <TextInput source="h1" fullWidth label="Заголовок H1" />
     <TextInput source="intro" multiline fullWidth label="Вступ під заголовком" helperText="1-2 речення: що зробили і що показують фото" />
     <PostEditor source="content" label="Текст кейсу" />
-    <TextInput source="image_alt" fullWidth label="Alt фото" />
     <TextInput source="seo_title" fullWidth label="SEO title" />
     <TextInput source="seo_description" multiline fullWidth label="SEO description" />
 
@@ -41,7 +42,7 @@ export const OurWorkFormFields = () => (
     <TextInput source="h1_en" fullWidth label="Заголовок H1 en" />
     <TextInput source="intro_en" multiline fullWidth label="Вступ en" />
     <PostEditor source="content_en" label="Текст кейсу en" />
-    <TextInput source="image_alt_en" fullWidth label="Alt фото en" />
+    <AltTextInput source="image_alt_en" imageSource="image_before" label="Alt фото en" fallback="назву роботи" />
     <TextInput source="seo_title_en" fullWidth label="SEO title en" />
     <TextInput source="seo_description_en" multiline fullWidth label="SEO description en" />
   </>

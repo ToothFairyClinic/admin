@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import { AltTextInput } from "@app/common/components/alt-text-input/alt-text-input.component";
 import {
   ArrayInput,
   Edit,
@@ -58,14 +59,14 @@ export const HomePageEdit = () => (
           <TextInput source="about_title" label="Заголовок H2" fullWidth />
           <PostEditor source="about_text" label="Текст" />
           <TextInput source="about_button" label="Текст кнопки (прокручує до послуг)" fullWidth />
-          <TextInput source="about_image_alt" label="Alt фото" fullWidth />
+          <AltTextInput source="about_image_alt" imageSource="about_image" label="Alt фото" fallback="заголовок блоку" />
         </Lang>
         <Lang title="EN">
           <TextInput source="about_label_en" label="Label" fullWidth />
           <TextInput source="about_title_en" label="H2" fullWidth />
           <PostEditor source="about_text_en" label="Text" />
           <TextInput source="about_button_en" label="Button" fullWidth />
-          <TextInput source="about_image_alt_en" label="Image alt" fullWidth />
+          <AltTextInput source="about_image_alt_en" imageSource="about_image" label="Image alt" fallback="заголовок блоку" />
         </Lang>
       </TabbedForm.Tab>
 

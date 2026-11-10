@@ -1,4 +1,5 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
+import { AltTextInput } from "@app/common/components/alt-text-input/alt-text-input.component";
 import { CustomTitle } from "@app/common/components/custom-title/custom-title.component";
 import { ArrayInput, Edit, ReferenceInput, SelectInput, SimpleForm, SimpleFormIterator, TextInput } from "react-admin";
 import { PostEditor } from "@app/common/components/post-editor/post-editor.component";
@@ -17,8 +18,8 @@ export const ServicesEdit = () => {
         <PostEditor source="description_en" label="Опис en" />
         <CloudinaryInput source="image" label="Фото іконки" />
         <CloudinaryInput source="mainImage" label="Фото послуги" />
-        <TextInput source="image_alt" label="Alt текст" />
-        <TextInput source="image_alt_en" label="Alt текст en" />
+        <AltTextInput source="image_alt" imageSource="mainImage" label="Alt фото послуги" fallback="назву послуги" />
+        <AltTextInput source="image_alt_en" imageSource="mainImage" label="Alt фото послуги en" fallback="назву послуги" />
 
         <ArrayInput source="faq_ua" label="Часті питання (FAQ UA)" fullWidth>
           <SimpleFormIterator inline>

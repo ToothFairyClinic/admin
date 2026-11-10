@@ -1,4 +1,5 @@
-import { Node } from "@tiptap/core";
+import { Extension, Node } from "@tiptap/core";
+import { Plugin } from "@tiptap/pm/state";
 
 /**
  * Фото з підписом: <figure><img><figcaption>підпис</figcaption></figure>.
@@ -34,6 +35,35 @@ export const Figure = Node.create({
 
   renderHTML({ node }) {
     return ["figure", ["img", { src: node.attrs.src, alt: node.attrs.alt }], ["figcaption", 0]];
+  },
+});
+
+/** Подія для відкриття вікна alt з тексту (подвійний клік по фото). */
+export const ALT_EDIT_EVENT = "tf-alt-edit";
+
+/**
+ * Подвійний клік по фото в тексті відкриває вікно опису (alt): працює і для фото з підписом (figure),
+ * і для окремого зображення в абзаці.
+ */
+export const ImageAltEdit = Extension.create({
+  name: "imageAltEdit",
+
+  addProseMirrorPlugins() {
+    const editor = this.editor;
+    return [
+      new Plugin({
+        props: {
+          handleDoubleClickOn(_view, _pos, node, nodePos, event) {
+            if ((event.target as HTMLElement | null)?.tagName !== "IMG") return false;
+            if (node.type.name === "image") editor.commands.setNodeSelection(nodePos);
+            else if (node.type.name === "figure") editor.commands.setTextSelection(nodePos + 1);
+            else return false;
+            window.dispatchEvent(new CustomEvent(ALT_EDIT_EVENT, { detail: { editor } }));
+            return true;
+          },
+        },
+      }),
+    ];
   },
 });
 

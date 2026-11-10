@@ -1,3 +1,4 @@
+import { AltTextInput } from "@app/common/components/alt-text-input/alt-text-input.component";
 import {
   ArrayInput,
   BooleanInput,
@@ -81,7 +82,7 @@ export const PostFormFields = () => (
 
     <h3>Головне зображення</h3>
     <CloudinaryInput source="hero_image" label="Зображення вгорі сторінки" />
-    <TextInput source="hero_image_alt" fullWidth label="Alt головного зображення" />
+    <AltTextInput source="hero_image_alt" imageSource="hero_image" label="Alt головного зображення" fallback="заголовок статті" />
 
     <h3>Відео під першим екраном</h3>
     <p style={{ margin: 0, opacity: 0.7 }}>
@@ -124,7 +125,7 @@ export const PostFormFields = () => (
 
     <PostEditor source="content_en" label="Текст статті en" />
 
-    <TextInput source="hero_image_alt_en" fullWidth label="Alt головного зображення en" />
+    <AltTextInput source="hero_image_alt_en" imageSource="hero_image" label="Alt головного зображення en" fallback="заголовок статті" />
 
     <ArrayInput source="faq_en" label="FAQ en" fullWidth>
       <SimpleFormIterator inline>

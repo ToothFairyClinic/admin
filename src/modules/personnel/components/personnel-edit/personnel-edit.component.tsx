@@ -1,4 +1,5 @@
 import { CloudinaryInput } from "@app/common/components/cloudinary-input/cloudinary-input.comnponent";
+import { AltTextInput } from "@app/common/components/alt-text-input/alt-text-input.component";
 import { PostEditor } from "@app/common/components/post-editor/post-editor.component";
 import {
   ArrayInput,
@@ -60,8 +61,8 @@ const PersonnelEditForm = () => {
       />
 
       <CloudinaryInput source="image" label="Фото лікаря" />
-      <TextInput source="image_alt" fullWidth label="Alt для фото лікаря (UA)" />
-      <TextInput source="image_alt_en" fullWidth label="Alt для фото лікаря (EN)" />
+      <AltTextInput source="image_alt" imageSource="image" label="Alt для фото лікаря (UA)" fallback="ім'я лікаря" />
+      <AltTextInput source="image_alt_en" imageSource="image" label="Alt для фото лікаря (EN)" fallback="ім'я лікаря" />
 
       <h3>URL та Спеціалізації</h3>
       <TextInput source="slug" fullWidth label="Slug (UA)" required />

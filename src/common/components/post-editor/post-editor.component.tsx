@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import TableChartIcon from "@mui/icons-material/TableChart";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import ImageSearchIcon from "@mui/icons-material/ImageSearch";
 import HtmlIcon from "@mui/icons-material/Html";
 import IntegrationInstructionsIcon from "@mui/icons-material/IntegrationInstructions";
 import { useNotify } from "react-admin";
@@ -35,7 +36,8 @@ import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import { useCloudinarySignatureLazyQuery } from "@app/core/types";
 import { prepareImage, uploadErrorMessage, uploadToCloudinary } from "@app/core/cloudinary-upload";
-import { EMBED_EDIT_EVENT, Figure, formatHtml, HtmlEmbed, wrapUnknownHtml } from "./editor-extensions";
+import { ALT_EDIT_EVENT, EMBED_EDIT_EVENT, Figure, formatHtml, HtmlEmbed, ImageAltEdit, wrapUnknownHtml } from "./editor-extensions";
+import { PhotoDialog, PhotoDialogResult } from "./photo-dialog.component";
 
 const CLOUD_NAME = "dc7d3byxg";
 const DELIVERY = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto,q_auto,w_1200`;
@@ -50,6 +52,7 @@ const editorOptions = {
     TableCell,
     Figure,
     HtmlEmbed,
+    ImageAltEdit,
   ],
 };
 
@@ -124,6 +127,7 @@ const ImageUploadButton = () => {
   const notify = useNotify();
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
+  const [uploaded, setUploaded] = useState<string | null>(null);
   const [getSignature] = useCloudinarySignatureLazyQuery({ fetchPolicy: "network-only" });
 
   const onPick = useCallback(
@@ -142,18 +146,8 @@ const ImageUploadButton = () => {
 
         const data = await uploadToCloudinary(file, s);
 
-        const alt = window.prompt("Опис зображення (alt): що на фото. Можна лишити порожнім:") || "";
-        const caption =
-          window.prompt("Підпис під фото (необов'язково, видно на сайті). Посилання на автора можна додати потім:") || "";
-        editor
-          .chain()
-          .focus()
-          .insertContent({
-            type: "figure",
-            attrs: { src: `${DELIVERY}/${data.public_id}`, alt },
-            content: caption.trim() ? [{ type: "text", text: caption.trim() }] : [],
-          })
-          .run();
+        // alt і підпис питаємо у вікні з попереднім переглядом; фото вставляється після підтвердження
+        setUploaded(`${DELIVERY}/${data.public_id}`);
       } catch (e) {
         notify(uploadErrorMessage(e, file), { type: "error" });
       } finally {
@@ -163,6 +157,20 @@ const ImageUploadButton = () => {
     },
     [editor, getSignature, notify]
   );
+
+  const insert = ({ alt, caption }: PhotoDialogResult) => {
+    if (!editor || !uploaded) return;
+    editor
+      .chain()
+      .focus()
+      .insertContent({
+        type: "figure",
+        attrs: { src: uploaded, alt },
+        content: caption ? [{ type: "text", text: caption }] : [],
+      })
+      .run();
+    setUploaded(null);
+  };
 
   return (
     <>
@@ -185,6 +193,73 @@ const ImageUploadButton = () => {
       >
         <AddPhotoAlternateIcon fontSize="inherit" />
       </ToggleButton>
+      <PhotoDialog
+        open={Boolean(uploaded)}
+        src={uploaded}
+        title="Нове фото в тексті"
+        submitLabel="Вставити фото"
+        withCaption
+        onClose={() => setUploaded(null)}
+        onSubmit={insert}
+      />
+    </>
+  );
+};
+
+/** Зміна alt фото, яке вже є в тексті: кнопка (курсор у фото з підписом або виділене зображення) чи подвійний клік по фото. */
+const ImageAltButton = () => {
+  const editor = useTiptapEditor();
+  const [open, setOpen] = useState(false);
+  const [, refresh] = useState(0);
+
+  useEffect(() => {
+    if (!editor) return;
+    const bump = () => refresh((n) => n + 1);
+    editor.on("selectionUpdate", bump);
+    editor.on("transaction", bump);
+    return () => {
+      editor.off("selectionUpdate", bump);
+      editor.off("transaction", bump);
+    };
+  }, [editor]);
+
+  useEffect(() => {
+    const onEdit = (e: Event) => {
+      if ((e as CustomEvent).detail?.editor === editor) setOpen(true);
+    };
+    window.addEventListener(ALT_EDIT_EVENT, onEdit);
+    return () => window.removeEventListener(ALT_EDIT_EVENT, onEdit);
+  }, [editor]);
+
+  const nodeName = editor?.isActive("figure") ? "figure" : editor?.isActive("image") ? "image" : null;
+  const attrs = nodeName && editor ? editor.getAttributes(nodeName) : {};
+
+  const save = ({ alt }: PhotoDialogResult) => {
+    if (editor && nodeName) editor.chain().focus().updateAttributes(nodeName, { alt }).run();
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <ToggleButton
+        aria-label="Alt фото"
+        title="Alt фото: опис зображення для пошуку (став курсор у фото або двічі клікни по ньому)"
+        value="image-alt"
+        selected={Boolean(nodeName)}
+        disabled={!editor || !editor.isEditable || !nodeName}
+        onClick={() => setOpen(true)}
+      >
+        <ImageSearchIcon fontSize="inherit" />
+      </ToggleButton>
+      <PhotoDialog
+        open={open && Boolean(nodeName)}
+        src={attrs.src}
+        initialAlt={attrs.alt || ""}
+        title="Alt фото"
+        submitLabel="Зберегти alt"
+        onClose={() => setOpen(false)}
+        onSubmit={save}
+      />
     </>
   );
 };
@@ -339,6 +414,19 @@ const EDITOR_SX = {
     pointerEvents: "none",
   },
   "& .ProseMirror p img": { maxWidth: "100%", maxHeight: 360 },
+  // фото без alt: червона рамка й підказка, щоб його було видно серед тексту
+  "& .ProseMirror figure:has(> img:not([alt])), & .ProseMirror figure:has(> img[alt=\"\"])": {
+    outline: "2px dashed #d32f2f",
+    outlineOffset: 4,
+  },
+  "& .ProseMirror figure:has(> img:not([alt]))::before, & .ProseMirror figure:has(> img[alt=\"\"])::before": {
+    content: '"Немає alt: двічі клікніть по фото"',
+    display: "block",
+    fontSize: 12,
+    color: "#d32f2f",
+    marginBottom: "6px",
+  },
+  "& .ProseMirror p img:not([alt]), & .ProseMirror p img[alt=\"\"]": { outline: "2px dashed #d32f2f" },
   "& .ProseMirror code": { background: "rgba(138,143,90,0.18)", borderRadius: "4px", padding: "0 4px", ...CODE_FONT },
   "& .tf-embed-view": {
     margin: "12px 0",
@@ -362,7 +450,7 @@ const EDITOR_SX = {
 };
 
 const HELPER =
-  "Фото з кнопки завантаження вставляється з підписом під ним. Кнопка HTML - код усього тексту; кнопка поруч з таблицею - вставити довільний код (YouTube, віджет, скрипт)";
+  "Фото з кнопки завантаження вставляється з alt (опис для пошуку) і підписом під ним; alt наявного фото змінюється подвійним кліком по ньому. Червона рамка - фото без alt. Кнопка HTML - код усього тексту; кнопка поруч з таблицею - вставити довільний код (YouTube, віджет, скрипт)";
 
 interface PostEditorProps {
   source: string;
@@ -386,6 +474,7 @@ export const PostEditor: FC<PostEditorProps> = ({ source, label }) => (
         <QuoteButtons size="medium" />
         <LinkButtons size="medium" />
         <ImageUploadButton />
+        <ImageAltButton />
         <TableButton />
         <EmbedButton />
         <HtmlSourceButton />
