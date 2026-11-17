@@ -1,5 +1,6 @@
 import React from "react";
 import { AltTextInput } from "@app/common/components/alt-text-input/alt-text-input.component";
+import { CertificateInput } from "@app/common/components/certificate-input/certificate-input.component";
 import {
   Create,
   SimpleForm,
@@ -75,9 +76,9 @@ export const PersonnelCreate = () => (
       </ReferenceArrayInput>
 
       <h3>Сертифікати та дипломи</h3>
-      <ArrayInput source="certificates" label="Список сертифікатів (зображення)">
+      <ArrayInput source="certificates" label="Список сертифікатів (фото та alt)">
         <SimpleFormIterator inline>
-          <CloudinaryInput source="" label="Фото сертифіката" />
+          <CertificateInput source="" />
         </SimpleFormIterator>
       </ArrayInput>
 
