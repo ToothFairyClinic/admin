@@ -21,7 +21,11 @@ export const PriceListEdit = () => {
         >
           <SelectInput optionText="title" label=" категорія" />
         </ReferenceInput>
-        <TextInput source="price" label="Ціна" />
+        <TextInput
+          source="price"
+          label="Ціна"
+          helperText="Ціна сама оновиться в текстах сайту, де стоїть токен цього рядка (див. колонку «Токен для текстів» у списку), за кілька хвилин. Рядок з токенами в текстах не видаляйте."
+        />
       </SimpleForm>
     </Edit>
   );

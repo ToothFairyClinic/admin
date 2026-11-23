@@ -1,6 +1,7 @@
 import {
   Datagrid,
   EditButton,
+  FunctionField,
   List,
   ReferenceField,
   TextField,
@@ -18,6 +19,11 @@ export const PriceListList = () => (
         <TextField source="title" label="Назва" />
       </ReferenceField>
       <TextField source="price" label="Ціна" />
+      {/* Токен ціни для текстів сайту (мета, описи, FAQ): фронт підставляє ціну з цього рядка */}
+      <FunctionField
+        label="Токен для текстів"
+        render={(record: { id: string }) => `{{price:${String(record.id).slice(0, 8)}|num}}`}
+      />
       <EditButton />
     </Datagrid>
   </List>
